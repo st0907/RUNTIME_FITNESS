@@ -1,2 +1,28 @@
-# RUNTIME_FITNESS
-Diploma Final Year Project
+# RunTimeFitness
+
+## Description
+RunTimeFitness is a locally hosted web-based fitness management system. It serves as an admin dashboard and member portal to streamline fitness tracking workflows. 
+
+## Component
+**Front-end**: HTML, CSS, JavaScript
+<br>**Back-end**: PHP
+
+## Contributors
+
+| Name             | Student ID  | GitHub Handle       |
+|------------------|-------------|---------------------|
+| Yap Xin Ling     | TP077224    | [@XinLing8](https://github.com/XinLing8) |
+| Serene Loh Zi Ting | TP075920  | [@serenenotserena](https://github.com/serenenotserena) |
+| Siew Zhen Lynn   | TP076386    | [@CelineSss](https://github.com/CelineSss) |
+| Sim Tian         | TP077056    | [@st0907](https://github.com/st0907) |
+| Yeo Pei Wen      | TP077057    | [@Wennn15](https://github.com/Wennn15) |
+| Yong Xuan Lyn    | TP076797    | [@RAC0034](https://github.com/RAC0034) |
+
+> [!NOTE]
+> This project is done for our module assignment.
+
+## More Information
+**Module Name**: CAPSTONE PROJECT
+<br>**Module Code**: AAPP011-4-2 
+<br>**Project Title**: Fitness Management System with Personalised Diet Plans
+<br>**Institution Name**: Asia Pacifis University of Technology & Innovation (APU)

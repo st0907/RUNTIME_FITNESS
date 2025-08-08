@@ -1,0 +1,348 @@
+<!--Programmer Name: Yap Xin Ling (TP077224)
+Program Name: dietPlan.html
+Description: Preview Diet Plan page for users before logging into the system
+First Written on: Wednesday, 18-June-2025
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Plans - RUNTIME FITNESS</title>
+    <link rel="icon" href="images/logo.png">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        body {
+            background-color: #fdf8f2;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        html {
+            height: 100%;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            height: 85px;
+            padding: 0 7% 0 3%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: relative;
+            top: 0;
+            z-index: 1000;
+        }
+        #navbar-img {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            height: 70px;
+        }
+        #navbar-img img{
+            height: 70px;
+        }
+        .nav-links {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #8D7151;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            padding: 0 0 5px 0;
+            position: relative;
+            border-bottom: none;
+        }
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #8E735B;
+        }
+        .nav-links a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #8E735B;
+        }
+        .navbar .get-started,
+        .navbar .login {
+            padding: 0.6rem 1.4rem;
+            border-radius: 25px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3 ease;
+            transform-origin: center;
+        }
+        .navbar .get-started{
+            background-color: #836953;
+            color: white;
+        }
+        .navbar .get-started:hover {
+            background-color: #a5836b;
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .navbar .login {
+            background-color: transparent;
+            color: #836953;
+            border: 2px solid #836953;
+        }
+        .navbar .login:hover {
+            background-color: #f7e7db;
+            transform: scale(1.1);
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        }
+        .nav-buttons{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem 2rem 2rem;
+        }
+        .diet-title {
+            font-size: 2.7rem;
+            color: #4a3c2c;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            text-align: center;
+        }
+        .diet-desc {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+            text-align: center;
+        }
+        .diet-timeline {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin: 3rem 0 2rem 0;
+            flex-wrap: wrap;
+        }
+        .timeline-step {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            text-align: center;
+            min-width: 200px;
+            max-width: 220px;
+            position: relative;
+            z-index: 1;
+            margin: 0 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .timeline-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.7rem;
+        }
+        .timeline-title {
+            font-size: 1.2rem;
+            color: #8E735B;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-desc {
+            color: #666;
+            font-size: 1rem;
+        }
+        .timeline-connector {
+            width: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, #e5dbc7 0%, #8E735B 100%);
+            border-radius: 2px;
+            margin: 0 0.5rem;
+            z-index: 0;
+        }
+        @media (max-width: 900px) {
+            .diet-timeline {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .timeline-connector {
+                width: 4px;
+                height: 40px;
+                margin: 0.5rem 0;
+                background: linear-gradient(180deg, #e5dbc7 0%, #8E735B 100%);
+            }
+        }
+        .diet-feature-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .diet-feature-title {
+            font-size: 1.3rem;
+            color: #8E735B;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+        }
+        .diet-feature-desc {
+            color: #666;
+            font-size: 1rem;
+        }
+        footer {
+            background-color: #f9f6f0;
+            color: #8D7151;
+            padding: 20px 0;
+            margin-top: 60px;
+            text-align: center;
+            border-top: 1px solid #e5dbc7;
+            margin-bottom: 0;
+        }
+        .home-nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f3ede3;
+            color: #8D7151;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(106, 72, 25, 0.1);
+            border: 1px solid rgba(141, 113, 81, 0.1);
+            margin-left: 16px;
+            text-decoration: none;
+        }
+        .home-nav-item:hover {
+            background-color: #8D7151;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(106, 72, 25, 0.2);
+        }
+        .home-nav-item::after {
+            display: none;
+        }
+
+        .slide-in-title {
+            opacity: 0;
+            transform: translateX(-60px);
+            animation: slideInTitle 1.5s cubic-bezier(0.4,0,0.2,1) 0.1s forwards;
+        }
+        .slide-in-desc {
+            opacity: 0;
+            transform: translateX(60px);
+            animation: slideInDesc 1.5s cubic-bezier(0.4,0,0.2,1) 0.5s forwards;
+        }
+        @keyframes slideInTitle {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @keyframes slideInDesc {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+    <!-- Font Awesome for home icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header>
+        <div id="navbar-img">
+            <a href="homepage.php" class="home-nav-item" title="BACK TO MAIN PAGE">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="aboutUs.php">About Us</a>
+            <a href="howItWorks.html">How it works</a>
+            <a href="dietPlan.html" class="active">Diet Plans</a>
+            <a href="workoutPlan.html">Workout Plans</a>
+            <a href="contact.php">Contact</a>
+        </div>
+        <div class="navbar">
+            <div class="nav-buttons">
+                <a href="login.html">
+                    <button class="login">Login</button>
+                </a>
+                <a href="register.php">
+                    <button class="get-started">Get started for free</button>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div class="main-content">
+        <div class="diet-title slide-in-title">🍽️ Diet Plans Overview</div>
+        <div class="diet-desc slide-in-desc">
+            Discover the full power of personalized nutrition! Our Diet Plans section helps you explore healthy eating, choose from curated meal plans, create your own, and track your journey. Start your transformation today!
+        </div>
+        <div class="diet-timeline">
+            <div class="timeline-step">
+                <div class="timeline-icon">📋</div>
+                <div class="timeline-title">Diet Plans</div>
+                <div class="timeline-desc">A variety of pre-designed meal plans and more — each nutritionally balanced for optimal health.</div>
+            </div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-step">
+                <div class="timeline-icon">🧑‍🍳</div>
+                <div class="timeline-title">Personalized Diet Plan</div>
+                <div class="timeline-desc">Generate a custom meal plan based on your body metrics, goals, and preferences.</div>
+            </div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-step">
+                <div class="timeline-icon">📔</div>
+                <div class="timeline-title">Nutrition Journal</div>
+                <div class="timeline-desc">Track your daily food intake, monitor nutrients, and gain insights into your eating habits.</div>
+            </div>
+            <div class="timeline-connector"></div>
+            <div class="timeline-step">
+                <div class="timeline-icon">💾</div>
+                <div class="timeline-title">My Plans</div>
+                <div class="timeline-desc">Save your generated personalized diet plans for easy access and future reference.</div>
+            </div>
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Force reflow to trigger animation if needed (for some browsers)
+        const title = document.querySelector('.slide-in-title');
+        const desc = document.querySelector('.slide-in-desc');
+        if (title) { title.classList.remove('slide-in-title'); void title.offsetWidth; title.classList.add('slide-in-title'); }
+        if (desc) { desc.classList.remove('slide-in-desc'); void desc.offsetWidth; desc.classList.add('slide-in-desc'); }
+    });
+    </script>
+    <footer>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p style="font-size: 1rem; margin: 0;">RunTime Fitness © 2025 | All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 
